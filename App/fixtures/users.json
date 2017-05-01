@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "toto",
+      "lastName": "toto",
+      "city": "toto",
+      "study": "toto"
+    },
+    {
+      "firstName": "Thibault\t\t",
+      "lastName": "Souef",
+      "city": "Paris",
+      "study": "Bac",
+      "id": 3
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
