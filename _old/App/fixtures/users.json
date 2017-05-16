@@ -1,0 +1,63 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "toto",
+      "lastName": "toto",
+      "city": "toto",
+      "study": "toto"
+    },
+    {
+      "firstName": "Thibault\t\t",
+      "lastName": "Souef",
+      "city": "Paris",
+      "study": "Bac",
+      "id": 3
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "city": "",
+      "study": "",
+      "id": 4
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "city": "",
+      "study": "",
+      "id": 5
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "city": "",
+      "study": "",
+      "id": 6
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "city": "",
+      "study": "",
+      "id": 7
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
