@@ -1,4 +1,12 @@
-import { AppRegistry } from 'react-native'
-import HomeScreen from './App/HomeScreen'
+import React, { Component } from 'react';
+import { AppRegistry, Text } from 'react-native';
 
-AppRegistry.registerComponent('applogin', () => HomeScreen);
+class HelloWorldApp extends Component {
+  render() {
+    return(
+        <Text>Hello World !</Text>
+    )
+  }
+}
+
+AppRegistry.registerComponent('applogin', () => HelloWorldApp);
