@@ -52,47 +52,47 @@ class Signup extends Component {
   render() {
      return (
        <View style={styles.container}>
-           <StatusBar
-             barStyle='light-content'
-           />
-           <TextInput
-             placeholder="Nom d'utilisateur"
-             placeholderTextColor="rgba(0,0,0,0.7)"
-             returnKeyType="next"
-             keyboardType="email-address"
-             autoCapitalize="none"
-             autoCorrect={false}
-             onSubmitEditing={() => this.passwordInput.focus()}
-             style={styles.input}
-             onChangeText={(text) => this.setState({email: text})}
-           />
-           <TextInput
-             placeholder="Mot de passe"
-             placeholderTextColor="rgba(0,0,0,0.7)"
-             returnKeyType="go"
-             secureTextEntry
-             style={styles.input}
-             ref={(input) => this.passwordInput = input}
-             onChangeText={(text) => this.setState({password: text})}
+         <StatusBar
+           barStyle='light-content'
+         />
+         <TextInput
+           placeholder="Nom d'utilisateur"
+           placeholderTextColor="rgba(0,0,0,0.7)"
+           returnKeyType="next"
+           keyboardType="email-address"
+           autoCapitalize="none"
+           autoCorrect={false}
+           onSubmitEditing={() => this.passwordInput.focus()}
+           style={styles.input}
+           onChangeText={(text) => this.setState({email: text})}
+         />
+         <TextInput
+           placeholder="Mot de passe"
+           placeholderTextColor="rgba(0,0,0,0.7)"
+           returnKeyType="go"
+           secureTextEntry
+           style={styles.input}
+           ref={(input) => this.passwordInput = input}
+           onChangeText={(text) => this.setState({password: text})}
 
-           />
+         />
 
-           <TouchableOpacity style={styles.buttonContainer}>
-             <Text
-               style={styles.buttonText}
-               onPress={this.goToLogin.bind(this)}
-               >
-               Se connecter
-             </Text>
-          </TouchableOpacity>
-           <TouchableOpacity style={styles.buttonContainer}>
-             <Text
-               style={styles.buttonText}
-               onPress={this.signup.bind(this)}
-               >
-               Créer un compte
-             </Text>
-           </TouchableOpacity>
+         <TouchableOpacity style={styles.buttonContainer}>
+           <Text
+             style={styles.buttonText}
+             onPress={this.goToLogin.bind(this)}
+           >
+             Se connecter
+           </Text>
+         </TouchableOpacity>
+         <TouchableOpacity style={styles.buttonContainer}>
+           <Text
+             style={styles.buttonText}
+             onPress={this.signup.bind(this)}
+           >
+             Créer un compte
+           </Text>
+         </TouchableOpacity>
        </View>
      )
    }

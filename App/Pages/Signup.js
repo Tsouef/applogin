@@ -8,11 +8,12 @@ import {
   StyleSheet
 } from 'react-native';
 import { Header,Title,Container, Content, List, ListItem, InputGroup, Input, Icon, Text, Picker, Button } from 'native-base';
+import { NavigationActions } from 'react-navigation'
+import * as firebase from "firebase";
 
 class Signup extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       email: '',
       password: '',
@@ -21,11 +22,12 @@ class Signup extends Component {
   }
 
   signup() {
+    const {state} = this.props.navigation;
+
     this.setState({
       loading: true
     })
-    console.log(this.props);
-    this.props.firebaseApp.auth().createUserWithEmailAndPassword(
+    firebase.auth().createUserWithEmailAndPassword(
       this.state.email,
       this.state.password)
       .then(() => {
@@ -35,7 +37,8 @@ class Signup extends Component {
           password: '',
           loading: false
         })
-        //TODO Redirect
+        this._navigateTo('Login')
+
       })
       .catch((error) => {
         this.setState({
@@ -86,6 +89,13 @@ class Signup extends Component {
           {content}
       </Container>
     );
+  }
+  _navigateTo = (routeName: string) => {
+    const actionToDispatch = NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName })]
+    })
+    this.props.navigation.dispatch(actionToDispatch)
   }
 }
 
