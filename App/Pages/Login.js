@@ -1,25 +1,19 @@
 'use strict';
 import React, {Component} from 'react';
 import {
-  AppRegistry,
   AsyncStorage,
   View,
-  ToolbarAndroid,
   ActivityIndicator,
-  StyleSheet
+  StyleSheet,
+  Image
 } from 'react-native';
 import {
-  Header,
-  Container,
-  Title,
-  Content,
   List,
   ListItem,
   InputGroup,
   Input,
   Icon,
   Text,
-  Picker,
   Button
 } from 'native-base';
 import { NavigationActions } from 'react-navigation'
@@ -29,8 +23,6 @@ import * as firebase from "firebase";
 class Login extends Component {
   constructor(props) {
     super(props);
-    console.log(firebase);
-    // We have the same props as in our signup.js file and they serve the same purposes.
     this.state = {
       loading: false,
       email: '',
@@ -38,51 +30,52 @@ class Login extends Component {
     }
   }
 
+  focusPasswordInput() {
+      this._passwordInput._textInput.focus();
+  }
   render() {
     const {navigate} = this.props.navigation;
 
-    // The content of the screen should be inputs for a username, password and submit button.
-    // If we are loading then we display an ActivityIndicator.
-    const content = this.state.loading
-      ? <View style={styles.container}>
-          <ActivityIndicator size="large"/>
-        </View>
-      : <Content>
-        <List>
-          <ListItem>
-            <InputGroup>
-              <Icon name="ios-person" style={{
-                color: '#0A69FE'
-              }}/>
-              <Input onChangeText={(text) => this.setState({email: text})} value={this.state.email} placeholder={"Adresse email"}/>
-            </InputGroup>
-          </ListItem>
-          <ListItem>
-            <InputGroup>
-              <Icon name="ios-unlock" style={{
-                color: '#0A69FE'
-              }}/>
-              <Input onChangeText={(text) => this.setState({password: text})} value={this.state.password} secureTextEntry={true} placeholder={"Mot de passe"}/>
-            </InputGroup>
-          </ListItem>
-        </List>
-
-        <Button info block style={styles.buttonContainer} onPress={this.login.bind(this)}>
-          <Text>Se connecter</Text>
-        </Button>
-        <Button success block onPress={() => navigate('Signup')} style={styles.buttonContainer}>
-          <Text>Créer un utilisateur</Text>
-        </Button>
-      </Content>;
-
-    // A simple UI with a toolbar, and content below it.
     return (
-      <Container>
-        <Header>
-          <Title>Page de connexion</Title>
-        </Header>
-        {content}
-      </Container>
+      <View style={styles.container}>
+        <View style={styles.display}>
+          <Image style={styles.image} resizeMode={Image.resizeMode.center} source={require('../assets/images/logo.png')} />
+        </View>
+        <View style={styles.form}>
+          <InputGroup>
+            <Icon name="ios-person" style={{color: '#FFFFFF'}} />
+            <Input
+              onChangeText={(text) => this.setState({email: text})}
+              value={this.state.email}
+              keyboardType="email-address"
+              onSubmitEditing={() => this._passwordInput.focus()}
+              returnKeyType="next"
+              placeholderTextColor='#FFFFFF'
+              placeholder={"Adresse email"}
+            />
+          </InputGroup>
+          <InputGroup>
+            <Icon name="ios-unlock" style={{color: '#FFFFFF'}} />
+            <Input
+              ref = { ref => this._passwordInput = ref }
+              onChangeText={(text) => this.setState({password: text})}
+              value={this.state.password}
+              returnKeyType="go"
+              secureTextEntry={true}
+              placeholderTextColor='#FFFFFF'
+              placeholder={"Mot de passe"}
+            />
+          </InputGroup>
+          <View style={styles.buttonContainer}>
+            <Button style={{backgroundColor: '#F44336'}} small rounded onPress={this.login.bind(this)}>
+              <Text>Se connecter</Text>
+            </Button>
+            <Button style={{backgroundColor: '#757575'}} small rounded onPress={() => navigate('Signup')}>
+              <Text>Créer un utilisateur</Text>
+            </Button>
+          </View>
+        </View>
+       </View>
     );
   }
 
@@ -110,24 +103,34 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20
+    padding: 20,
+    flex: 1,
+    backgroundColor: '#D32F2F',
+    flexDirection: 'column',
+    justifyContent: 'space-around'
   },
-  input: {
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    marginBottom: 20,
-    color: 'black',
-    paddingHorizontal: 10
+  display:{
+    alignItems: 'center',
+  },
+  image:{
+    width: 200,
+    height: 50,
+    resizeMode: 'contain'
+  },
+  icons: {
+    color: '#FFFFFF',
   },
   buttonContainer: {
-    backgroundColor: '#E8160C',
-    paddingVertical: 15
+    justifyContent: 'space-around',
+    marginTop: 30,
+    marginBottom: 30,
+    flex: 1,
+    flexDirection: 'row'
   },
-  buttonText: {
-    textAlign: 'center',
-    color: '#FFFFFF',
-    fontWeight: '700'
+  button: {
+    backgroundColor: '#FFCDD2'
   }
+
 })
 
 export default Login;

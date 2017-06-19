@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
   AsyncStorage,
-  StyleSheet,
-  ActivityIndicator,
-  View,
-  Text,
 } from 'react-native';
 import { StackNavigator, NavigationActions } from 'react-navigation';
 import Login from './App/Pages/Login'
 import Signup from './App/Pages/Signup'
 import Account from './App/Pages/Main'
+import SplashScreen from './App/Pages/SplashScreen'
 
 import Firebase from "./App/includes/firebase/firebase";
 
@@ -30,7 +27,7 @@ class App extends Component {
       let user_data = JSON.parse(user_data_json);
       let openingPage = { openingPage: 'Login' };
       if(user_data != null) {
-        this.setState({openingPage: 'Main'});
+        this.setState({openingPage: 'Account'});
       } else {
         this.setState(openingPage);
       }
@@ -39,15 +36,10 @@ class App extends Component {
 
   render() {
     if (this.state.openingPage) {
-      console.log('OPEN');
       this._navigateTo(this.state.openingPage)
     } else {
       return (
-        <View style={styles.container}>
-          <View style={styles.body}>
-            <ActivityIndicator size="large" />
-          </View>
-        </View>
+        <SplashScreen />
       )
     }
   }
@@ -66,7 +58,7 @@ const AppLogin = StackNavigator({
     screen: App,
     headerMode: 'none'
   },
-  Main: {
+  Account: {
     screen: Account,
     headerMode: 'none'
   },
@@ -81,27 +73,5 @@ const AppLogin = StackNavigator({
   },
   { headerMode: 'none' }
 );
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20
-  },
-  input: {
-    height: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    marginBottom: 20,
-    color: 'black',
-    paddingHorizontal: 10
-  },
-  buttonContainer: {
-    backgroundColor: '#E8160C',
-    paddingVertical: 15
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: '#FFFFFF',
-    fontWeight: '700'
-  }
-})
 
 AppRegistry.registerComponent('applogin', () => AppLogin)
