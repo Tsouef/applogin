@@ -5,17 +5,18 @@ import {
   View,
   ActivityIndicator,
   StyleSheet,
-  Image
+  Image,
+  KeyboardAvoidingView
 } from 'react-native';
 import {
   List,
   ListItem,
   InputGroup,
   Input,
-  Icon,
   Text,
   Button
 } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationActions } from 'react-navigation'
 import * as firebase from "firebase";
 
@@ -37,14 +38,15 @@ class Login extends Component {
     const {navigate} = this.props.navigation;
 
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.display}>
           <Image style={styles.image} resizeMode={Image.resizeMode.center} source={require('../assets/images/logo.png')} />
         </View>
         <View style={styles.form}>
           <InputGroup>
-            <Icon name="ios-person" style={{color: '#FFFFFF'}} />
+            <Icon name="user" style={{color: '#FFFFFF'}} />
             <Input
+              style={styles.input}
               onChangeText={(text) => this.setState({email: text})}
               value={this.state.email}
               keyboardType="email-address"
@@ -54,9 +56,10 @@ class Login extends Component {
               placeholder={"Adresse email"}
             />
           </InputGroup>
-          <InputGroup>
-            <Icon name="ios-unlock" style={{color: '#FFFFFF'}} />
+          <InputGroup textColor={styles.input}>
+            <Icon name="key" style={{color: '#FFFFFF'}} />
             <Input
+              style={styles.input}
               ref = { ref => this._passwordInput = ref }
               onChangeText={(text) => this.setState({password: text})}
               value={this.state.password}
@@ -75,17 +78,16 @@ class Login extends Component {
             </Button>
           </View>
         </View>
-       </View>
+      </KeyboardAvoidingView>
     );
   }
 
   login() {
     this.setState({loading: true});
-    // Log in and display an alert to tell the user what happened.
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((userData) => {
       this.setState({loading: false});
       AsyncStorage.setItem('userData', JSON.stringify(userData));
-      this._navigateTo('Main');
+      this._navigateTo('App');
     }).catch((error) => {
       this.setState({loading: false});
       alert('Login Failed. Please try again' + error);
@@ -120,6 +122,9 @@ const styles = StyleSheet.create({
   icons: {
     color: '#FFFFFF',
   },
+  input: {
+    color: '#FFFFFF',
+  },
   buttonContainer: {
     justifyContent: 'space-around',
     marginTop: 30,
@@ -130,7 +135,6 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#FFCDD2'
   }
-
 })
 
 export default Login;

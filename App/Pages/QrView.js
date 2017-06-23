@@ -1,20 +1,27 @@
-import React,{ Component }  from 'react';
+import React, { Component }  from 'react';
 import {
   View,
   Text,
+  Button,
   StyleSheet
 } from 'react-native';
 import { TabNavigator, NavigationActions } from 'react-navigation';
 import Camera from 'react-native-camera';
 import _ from 'lodash';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AccountButton from '../Components/AccountButton';
 
 
-class HomeScreen extends Component {
-  static navigationOptions = {
+class QrView extends Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+  }
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    headerRight: <AccountButton navigation={navigation} />,
     tabBarLabel: 'QRcode',
     tabBarIcon: <Icon name="qrcode" size={30}  />
-  };
+  });
 
   onBarCodeRead(e) {
     const navigateAction = NavigationActions.navigate({
@@ -72,4 +79,4 @@ const styles = StyleSheet.create({
 
 
 
-export default HomeScreen;
+export default QrView;

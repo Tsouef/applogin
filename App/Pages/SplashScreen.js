@@ -11,7 +11,6 @@ const SplashScreen = () => (
   <View style={styles.container}>
     <Image style={styles.image} resizeMode={Image.resizeMode.center} source={require('../assets/images/logo.png')} />
     <ActivityIndicator size="large" />
-
   </View>
 )
 

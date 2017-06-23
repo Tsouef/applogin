@@ -3,11 +3,15 @@ import {
   AppRegistry,
   AsyncStorage,
 } from 'react-native';
-import { StackNavigator, NavigationActions } from 'react-navigation';
-import Login from './App/Pages/Login'
-import Signup from './App/Pages/Signup'
-import Account from './App/Pages/Main'
-import SplashScreen from './App/Pages/SplashScreen'
+import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
+import Login from './App/Pages/Login';
+import Signup from './App/Pages/Signup';
+import Account from './App/Pages/Account';
+import SplashScreen from './App/Pages/SplashScreen';
+import QrView from './App/Pages/QrView';
+import Formulaire from './App/Pages/Formulaire';
+import Groupe from './App/Pages/Groupe';
+import SearchMail from './App/Pages/SearchMail';
 
 import Firebase from "./App/includes/firebase/firebase";
 
@@ -27,7 +31,7 @@ class App extends Component {
       let user_data = JSON.parse(user_data_json);
       let openingPage = { openingPage: 'Login' };
       if(user_data != null) {
-        this.setState({openingPage: 'Account'});
+        this.setState({openingPage: 'Main'});
       } else {
         this.setState(openingPage);
       }
@@ -53,25 +57,55 @@ class App extends Component {
   }
 }
 
+const TabLogin = TabNavigator({
+  QrView: {
+    screen: QrView,
+  },
+  Formulaire: {
+    screen: Formulaire,
+  },
+  Groupe: {
+    screen: Groupe,
+  }
+}, {
+  tabBarPosition: 'bottom',
+  swipeEnabled: true,
+  animationEnabled: true,
+  lazy: true,
+  tabBarOptions: {
+    activeTintColor: '#EAEBED',
+    activeBackgroundColor: '#01A7C2'
+  },
+});
+
 const AppLogin = StackNavigator({
   App: {
     screen: App,
-    headerMode: 'none'
+    header: null,
   },
   Account: {
-    screen: Account,
-    headerMode: 'none'
+    screen: Account
   },
   Login: {
     screen: Login,
-    headerMode: 'none'
+    header: null,
+    navigationOptions: {
+        header: null
+    }
   },
   Signup: {
     screen: Signup,
-    headerMode: 'none'
-   }
+    header: null,
+    navigationOptions: {
+        header: null
+    }
   },
-  { headerMode: 'none' }
-);
+  SearchMail: {
+    screen: SearchMail
+  },
+  Main: {
+    screen: TabLogin
+  }
+});
 
 AppRegistry.registerComponent('applogin', () => AppLogin)
